@@ -16,13 +16,17 @@ model = joblib.load("model.pkl")
 st.title("🏠 Predicción del Precio de Casas en la India.")
 st.markdown(
     """
-    Esta aplicación utiliza **Machine Learning** para estimar el precio de una casa  
-    a partir de sus características principales, tales como:
-     - Cantidad de Habitaciones
-     - Longitud de la Casa en pies cuadrados
-     - Cantidad de Baños
-     - Condición de la Casa (1 al 5)
-     - Escuelas cercanas a la Casa.
+Esta aplicación permite estimar el precio de una casa utilizando un modelo de Machine Learning entrenado con datos inmobiliarios.
+
+El precio se muestra en Rupias Indias (INR). Ten en cuenta que 1 INR equivale aproximadamente a 0.011 USD, por lo que el monto puede parecer alto al compararlo con dólares.
+
+Para realizar la estimación, el modelo considera los siguientes factores:
+
+- Número de habitaciones
+- Tamaño de la vivienda en pies cuadrados
+- Número de baños
+- Estado general de la casa (escala de 1 a 5)
+- Escuelas cercanas a la propiedad
     """
 )
 
@@ -90,7 +94,7 @@ if boton_predecir:
     X = np.array([[habitaciones, banos, area_vivienda, condicion, escuelas_cercanas]])
     prediccion = model.predict(X)[0]
 
-    st.success(f"💰 **Precio estimado de la vivienda:** ${prediccion:,.2f}")
+    st.success(f"💰 **Precio estimado de la vivienda:** ₹{prediccion:,.2f} Rupias Indias")
 
 else:
     st.info("👈 Ingresa los datos y presiona **Predecir Precio**")
